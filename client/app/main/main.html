@@ -1,4 +1,7 @@
-<div ng-controller="DatepickerDemoCtrl">
-    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
-      <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(
+<div class="container" ng-controller="MainCtrl">
+    <p>Selected date is: <em>{{dt | date:'fullDate' }}</em></p>
+    <div style="display:inline-block; min-height:290px;">
+      <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
+      <button class="btn btn-primary" ng-click="submit(dt)">Submit</button>
+    </div>
 </div>
