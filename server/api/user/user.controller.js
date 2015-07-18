@@ -99,3 +99,10 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+exports.setDate = function(req, res, next) {
+  var userId = req.user._id;
+  User.findById(userId, function (err, user) {
+    user.entryDate = req.body.date;
+  }
+}
