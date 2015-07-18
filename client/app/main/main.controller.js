@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('angelHackOsApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, User) {
     $scope.submit = function(date) {
-      console.log(date);
-    }
+      User.setDate({date: date});
+    };
   });
