@@ -11,8 +11,8 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
-  entryDate: Number,
-  //hashedPassword: String,              d
+  entryDate: Date,
+  //hashedPassword: String,
   provider: String,
   salt: String,
   phone: String
