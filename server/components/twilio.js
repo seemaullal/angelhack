@@ -21,6 +21,4 @@ TwilioTxt.sendMessage = function(to, msg) {
   })
 };
 
-TwilioTxt.sendMessage('+15163484851', 'its kamilla');
-
 module.exports = TwilioTxt;
