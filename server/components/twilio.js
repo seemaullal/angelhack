@@ -7,6 +7,7 @@ var my_number = "+18055902511";
 var TwilioTxt = {};
 
 TwilioTxt.sendMessage = function(to, msg) {
+  console.log('sending msg', msg);
   return twilio.sendMessage({
     to: to,
     from: my_number,

@@ -10,7 +10,7 @@ var express = require('express'),
   router.post("/", getMessage);
 
 function getMessage(req, res){
-  console.log(req.body);
+  console.log('received message:',req.body);
   // registration flow
   var user_phone = req.body.From;
   var message = req.body.Body;
@@ -37,8 +37,9 @@ function getMessage(req, res){
 
 var analyzeBody = function(body, user) {
   body = body.toLowerCase();
+  var response;
   if (body === 'new user'|| body === 'newuser'){
-    return 'Welcome! Please REPLY with the date of the first day of your last period in the format MM-DD. For example, June 01 would be "06-01". If you do not remember the date of your last period, please send a text with the date of the first day of your next period when it next occurs/ If today is the first day of your period, you can reply with "today"';
+  response =  'Welcome! Please REPLY with the date of the first day of your last period in the format MM-DD. For example, June 01 would be "06-01". If you do not remember the date of your last period, please send a text with the date of the first day of your next period when it next occurs/ If today is the first day of your period, you can reply with "today"';
   } else if (body.search(/([0-9]{1,2}[-][0-9]{1,2})\w+/) !== -1 || body.toLowerCase() === 'today') {
 
     if (body.toLowerCase() === 'today') {
@@ -47,20 +48,24 @@ var analyzeBody = function(body, user) {
       var new_date = '2015-' + body;
       user.entryDate = new Date(new_date);
     }
+    response = 'Thanks! We have recorded you period as starting on ' + user.entryDate + '. Wait for your daily text messages to start arriving tomorrow!';
     user.save(function(err, data){
-      if(err) return 'Sorry, there was an error saving the date. Please try again'
+      if(err) {
+        response = 'Sorry, there was an error saving the date. Please try again';
+      }
       else {
-        return 'Thanks! We have recorded you period as starting on ' + body + '. Wait for your daily text messages to start arriving tomorrow!'
+        console.log(data);
       }
     })
   } else if (body.search(/[?]/) !== -1) {
     var new_question = new Thing();
     new_question.info = body;
     new_question.phone = user.phone;
-    return 'Thanks! We have received your question: "' + body + '". We will text you an answer as soon as we can get to it.'
+    response = 'Thanks! We have received your question: "' + body + '". We will text you an answer as soon as we can get to it.'
   } else {
-    console.log(body);
-  };
+    response = 'We just received "' + body +'", which appears to be an invalid response. Please try again.';
+  }
+  return response;
 }
 
 module.exports = router;
