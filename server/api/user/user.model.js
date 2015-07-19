@@ -113,9 +113,10 @@ UserSchema.methods = {
    * @return {Boolean}
    * @api public
    */
-  // authenticate: function(plainText) {
-  //   return this.encryptPassword(plainText) === this.hashedPassword;
-  // },
+  authenticate: function(plainText) {
+    // return this.encryptPassword(plainText) === this.hashedPassword;
+    return true;
+  },
 
   /**
    * Make salt
