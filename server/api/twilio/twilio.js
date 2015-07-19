@@ -4,6 +4,11 @@ var express = require('express'),
   router = express.Router();
 
   router.post("/", getMessage);
+  router.post("/send/", sendMessage);
+
+var sendMessage = function(req, res) {
+
+}
 
 var getMessage = function(req, res){
   console.log(req.body);

@@ -15,7 +15,8 @@ var UserSchema = new Schema({
   //hashedPassword: String,
   provider: String,
   salt: String,
-  phone: String
+  phone: String,
+  lastTest : {type: Date, default: new Date()}
 });
 
 /**

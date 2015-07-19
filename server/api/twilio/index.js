@@ -9,7 +9,18 @@ var express = require('express'),
   dayCycle = require('../../components/dayCycle.js');
 
 
+  router.post("/:id", sendAnswer);
   router.post("/", getMessage);
+
+function sendAnswer(req, res){
+  console.log(req.body);
+  var answer = req.body.answer;
+  var message = 'You have received a reply to your question: ' + answer;
+  User.findOne({phone: req.params.id}, function(err, user) {
+    twilioTxt.sendMessage(user.phone, message);
+    res.send('message sent:' + message);
+  })
+}
 
 function getMessage(req, res){
   console.log('received message:',req.body);
@@ -36,6 +47,8 @@ function getMessage(req, res){
   	}
   });
 };
+
+
 
 var analyzeBody = function(body, user) {
   body = body.toLowerCase();
@@ -65,6 +78,9 @@ var analyzeBody = function(body, user) {
     var new_question = new Thing();
     new_question.info = body;
     new_question.phone = user.phone;
+    new_question.save(function(err, data){
+      if (err) console.log(err);
+    })
     response = 'Thanks! We have received your question: "' + body + '". We will text you an answer as soon as we can get to it.'
   } else {
     response = 'We just received "' + body +'", which appears to be an invalid response. Please try again.';

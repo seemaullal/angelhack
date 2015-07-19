@@ -1,4 +1,5 @@
 
+var User = require('../api/user/user.model')
 var env = require('../config/local.env.sample.js');
 var twilio = require('twilio')(env.TWILIO_SID, env.TWILIO_KEY);
 var my_number = "+18055902511";
