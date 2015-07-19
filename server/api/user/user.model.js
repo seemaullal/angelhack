@@ -12,24 +12,25 @@ var UserSchema = new Schema({
     default: 'user'
   },
   entryDate: Number,
-  hashedPassword: String,
+  //hashedPassword: String,
   provider: String,
-  salt: String
+  salt: String,
+  phone: String
 });
 
 /**
  * Virtuals
  */
 UserSchema
-  .virtual('password')
-  .set(function(password) {
-    this._password = password;
-    this.salt = this.makeSalt();
-    this.hashedPassword = this.encryptPassword(password);
-  })
-  .get(function() {
-    return this._password;
-  });
+  // .virtual('password')
+  // .set(function(password) {
+  //   this._password = password;
+  //   this.salt = this.makeSalt();
+  //   this.hashedPassword = this.encryptPassword(password);
+  // })
+  // .get(function() {
+  //   return this._password;
+  // });
 
 // Public profile information
 UserSchema
@@ -63,11 +64,11 @@ UserSchema
   }, 'Email cannot be blank');
 
 // Validate empty password
-UserSchema
-  .path('hashedPassword')
-  .validate(function(hashedPassword) {
-    return hashedPassword.length;
-  }, 'Password cannot be blank');
+// UserSchema
+//   .path('hashedPassword')
+//   .validate(function(hashedPassword) {
+//     return hashedPassword.length;
+//   }, 'Password cannot be blank');
 
 // Validate email is not taken
 UserSchema
@@ -95,9 +96,9 @@ UserSchema
   .pre('save', function(next) {
     if (!this.isNew) return next();
 
-    if (!validatePresenceOf(this.hashedPassword))
-      next(new Error('Invalid password'));
-    else
+    // if (!validatePresenceOf(this.hashedPassword))
+    //   next(new Error('Invalid password'));
+    // else
       next();
   });
 
@@ -112,9 +113,9 @@ UserSchema.methods = {
    * @return {Boolean}
    * @api public
    */
-  authenticate: function(plainText) {
-    return this.encryptPassword(plainText) === this.hashedPassword;
-  },
+  // authenticate: function(plainText) {
+  //   return this.encryptPassword(plainText) === this.hashedPassword;
+  // },
 
   /**
    * Make salt
@@ -133,11 +134,11 @@ UserSchema.methods = {
    * @return {String}
    * @api public
    */
-  encryptPassword: function(password) {
-    if (!password || !this.salt) return '';
-    var salt = new Buffer(this.salt, 'base64');
-    return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
-  },
+  // encryptPassword: function(password) {
+  //   if (!password || !this.salt) return '';
+  //   var salt = new Buffer(this.salt, 'base64');
+  //   return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  // },
 
   getCurrentCycleDay: function() {
     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
