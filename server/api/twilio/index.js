@@ -2,7 +2,7 @@ var express = require('express'),
   env = require('../../config/local.env.sample.js'),
   twilio = require('twilio')(env.TWILIO_SID, env.TWILIO_KEY),
   config = require('../../config/environment'),
-  User = require('../user.model'),
+  User = require('../user/user.model'),
   router = express.Router();
 
   router.post("/", getMessage);
