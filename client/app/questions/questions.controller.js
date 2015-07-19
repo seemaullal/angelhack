@@ -15,14 +15,14 @@ angular.module('angelHackOsApp')
       console.log(question);
       $http({
         method:'PUT',
-        url: 'http://localhost:9000/api/things/' + question._id,
+        url: '/api/things/' + question._id,
         data: question
       }).then(function(q){
         $scope.questions[i].answered = true;
         $scope.questions[i].answer = question.answer;
         $http({
           method:'POST',
-          url:'http://localhost:9000/api/twilio/' + question.phone,
+          url:'/api/twilio/' + question.phone,
           data: question
         }).then(function(sent){
           console.log(sent);
