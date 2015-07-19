@@ -18,7 +18,7 @@ Thing.find({}).remove(function() {
   }, {
     info: 'Is it ok to have sex with a condom during fertile days?',
     phone: '+18058139090'
-  } function(){
+  }, function(){
       console.log('finished populating questions');
     }
   );
