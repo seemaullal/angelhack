@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angelHackOsApp')
-  .controller('MainCtrl', function ($scope, User, Auth) {
+  .controller('MainCtrl', function ($scope, $location, User, Auth) {
     User.get().$promise.then(function(curUser) {
         $scope.user = curUser;
     })
