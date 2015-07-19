@@ -15,9 +15,10 @@ var express = require('express'),
 function sendAnswer(req, res){
   console.log(req.body);
   var answer = req.body.answer;
+  var user_phone = req.params.id;
   var message = 'You have received a reply to your question: ' + answer;
   User.findOne({phone: req.params.id}, function(err, user) {
-    twilioTxt.sendMessage(user.phone, message);
+    twilioTxt.sendMessage(user_phone, message);
     res.send('message sent:' + message);
   })
 }
