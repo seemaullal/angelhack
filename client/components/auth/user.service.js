@@ -17,6 +17,12 @@ angular.module('angelHackOsApp')
         params: {
           id:'me'
         }
+      },
+      setDate: {
+        method: 'PUT',
+        params: {
+          controller: 'setDate'
+        }
       }
 	  });
   });
