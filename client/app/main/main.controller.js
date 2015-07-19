@@ -29,4 +29,3 @@ The causes of PMS are not completely clear, but several factors may be involved.
     });
   });
 
->>>>>>> 50218f631ff7e2f22763ca894bbb516e071b44ed

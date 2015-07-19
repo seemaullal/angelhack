@@ -24,6 +24,8 @@
     <!-- endbuild -->
   </head>
   <body ng-app="angelHackOsApp">
+  <div ng-include="'components/navbar/navbar.html'"></div>
+
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -64,13 +66,8 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
-          <script src="app/factories/thing.service.js"></script>
-          <script src="app/factories/user.service.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
-          <script src="app/questions.js"></script>
-          <script src="app/questions/questions.controller.js"></script>
-          <script src="app/questions/questions.js"></script>
           <script src="app/setDate/setDate.controller.js"></script>
           <script src="app/setDate/setDate.js"></script>
           <script src="components/auth/auth.service.js"></script>
