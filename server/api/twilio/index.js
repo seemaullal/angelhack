@@ -11,8 +11,10 @@ function getMessage(req, res){
   console.log(req.body);
   // registration flow
   User.findOne({phone: req.body.From}, function(err, user) {
+	if (err) console.log(err);
   	if (!user) {
   		User.create({phone: req.body.From}, function(err, user) {
+  			if (err) console.log(err);
   			res.json(200, user);
   		});
   	}
