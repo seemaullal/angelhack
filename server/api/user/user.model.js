@@ -12,7 +12,7 @@ var UserSchema = new Schema({
     default: 'user'
   },
   entryDate: Number,
-  //hashedPassword: String,
+  //hashedPassword: String,              d
   provider: String,
   salt: String,
   phone: String
